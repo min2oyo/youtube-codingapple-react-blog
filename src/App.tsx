@@ -1,39 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
 
-  const data = [
-    {
-      id: 1,
-      subject: `남자코트 추천`,
-      description: `정말 좋음`,
-      like: 0,
-      createDate: `2020-11-10`,
-      modifiedDate: ``
-    },
-    {
-      id: 2,
-      subject: `강남 우동맛집`,
-      description: `맛있쪄용`,
-      like: 0,
-      createDate: `2020-11-11`,
-      modifiedDate: ``
-    },
-    {
-      id: 3,
-      subject: `파이썬독학`,
-      description: `헥헥`,
-      like: 0,
-      createDate: `2020-11-12`,
-      modifiedDate: ``
-    },
-  ];
-
-  const [subjects, setSubjects] = useState(data);
+  const [subjects, setSubjects] = useState<any>([]);
   const [modalSwitch, setModalSwitch] = useState(0);
-  const [like, setLike] = useState([0, 0, 0]);
   const [modal, setModal] = useState(false);
   const [addPost, setAddPost] = useState(``);
+
+  useEffect(() => {
+    fetch(`/data/subjects.json`)
+      .then(res => res.json())
+      .then(res => setSubjects(res));
+  }, []);
+
 
   return (
     <div className="App">
@@ -42,7 +21,7 @@ function App() {
       </div>
 
       {
-        subjects.map(function (item, i) {
+        subjects.map(function (item: any, i: any) {
           return (
             <div className="list" key={i}>
 
@@ -50,10 +29,7 @@ function App() {
                 {item.subject}
                 <span onClick={(e) => {
                   e.stopPropagation();
-                  const copy = [...like];
-                  copy[i] = copy[i] + 1;
-                  setLike(copy);
-                }}>👍</span> {item.like}
+                }}> 👍</span>{item.like}
               </h4>
 
               <p>2월 17일 발행</p>
