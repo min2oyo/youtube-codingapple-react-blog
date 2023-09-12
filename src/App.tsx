@@ -2,11 +2,11 @@ import { useState } from "react";
 
 function App() {
 
-  let [글제목, 글제목변경] = useState(['남자코트 추천', '강남 우동맛집', '파이썬독학']);
-  let [따봉, 따봉변경] = useState([0, 0, 0]);
-  let [modal, setModal] = useState(false);
-  let [title, setTitle] = useState(0);
-  let [입력값, 입력값변경] = useState('');
+  const [subjects, setSubjects] = useState(['남자코트 추천', '강남 우동맛집', '파이썬독학']);
+  const [like, setLike] = useState([0, 0, 0]);
+  const [modal, setModal] = useState(false);
+  const [title, setTitle] = useState(0);
+  const [addPost, setAddPost] = useState(``);
 
   return (
     <div className="App">
@@ -15,23 +15,23 @@ function App() {
       </div>
 
       {
-        글제목.map(function (a, i) {
+        subjects.map(function (a, i) {
           return (
             <div className="list" key={i}>
               <h4 onClick={() => { setModal(!modal); setTitle(i); }}>
-                {글제목[i]}
+                {subjects[i]}
                 <span onClick={(e) => {
                   e.stopPropagation();
-                  let copy = [...따봉];
+                  const copy = [...like];
                   copy[i] = copy[i] + 1;
-                  따봉변경(copy);
-                }}>👍</span> {따봉[i]}
+                  setLike(copy);
+                }}>👍</span> {like[i]}
               </h4>
               <p>2월 17일 발행</p>
               <button onClick={() => {
-                let copy = [...글제목];
+                const copy = [...subjects];
                 copy.splice(i, 1);
-                글제목변경(copy);
+                setSubjects(copy);
               }}>삭제</button>
             </div>
           );
@@ -39,16 +39,16 @@ function App() {
       }
 
       <input onChange={(e) => {
-        입력값변경(e.target.value);
+        setAddPost(e.target.value);
       }} />
       <button onClick={() => {
-        let copy = [...글제목];
-        copy.unshift(입력값);
-        글제목변경(copy);
+        const copy = [...subjects];
+        copy.unshift(addPost);
+        setSubjects(copy);
       }}>글발행</button>
 
       {
-        modal == true ? <Modal title={title} 글제목={글제목} /> : null
+        modal == true ? <Modal title={title} subjects={subjects} /> : null
       }
 
     </div >
@@ -60,7 +60,7 @@ export default App;
 function Modal(props: any) {
   return (
     <div className="modal">
-      <h4>{props.글제목[props.title]}</h4>
+      <h4>{props.subjects[props.title]}</h4>
       <p>날짜</p>
       <p>상세내용</p>
       <button>글수정</button>
