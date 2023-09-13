@@ -20,7 +20,7 @@ div {
   box-sizing: border-box;
 }
 
-.list {
+.post-list {
   padding-left: 20px;
   text-align: left;
   border-bottom: 1px solid grey;
@@ -33,7 +33,7 @@ div {
   text-align: left;
 }
 
-.black-nav {
+.nav {
   display: flex;
   background: black;
   width: 100%;
