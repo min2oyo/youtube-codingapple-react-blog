@@ -29,6 +29,10 @@ function App() {
                 {item.subject}
                 <span onClick={(e) => {
                   e.stopPropagation();
+                  const copy = [...subjects];
+                  copy[i].like = copy[i].like + 1;
+                  console.log(copy);
+                  setSubjects(copy);
                 }}> 👍</span>{item.like}
               </h4>
 
