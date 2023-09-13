@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import Nav from "../../components/Nav/Nav";
-import Modal from "../../components/Modal/Modal";
-import PostList from "./PostList/PostList";
+
 import Input from "./Input/Input";
+import Nav from "../../components/Nav/Nav";
+import PostList from "./PostList/PostList";
+import Modal from "../../components/Modal/Modal";
 
 const Main = () => {
   const [subjects, setSubjects] = useState<any>([]);
@@ -16,14 +17,13 @@ const Main = () => {
       .then(res => setSubjects(res));
   }, []);
 
-
   return (
     <div className="main">
       <Nav />
+      <Input subjects={subjects} setSubjects={setSubjects} addPost={addPost} setAddPost={setAddPost} />
       {subjects.map((item: any, i: number) =>
         <PostList key={item.id} item={item} i={i} subjects={subjects} setSubjects={setSubjects} modal={modal} setModal={setModal} setModalSwitch={setModalSwitch} />
       )}
-      <Input subjects={subjects} setSubjects={setSubjects} addPost={addPost} setAddPost={setAddPost} />
       {modal && <Modal modalSwitch={modalSwitch} subjects={subjects} />}
     </div >
   );

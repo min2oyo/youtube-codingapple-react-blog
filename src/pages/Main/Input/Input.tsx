@@ -1,4 +1,3 @@
-
 const Input = ({ subjects, setSubjects, addPost, setAddPost }: any) => {
   return (
     <div>
