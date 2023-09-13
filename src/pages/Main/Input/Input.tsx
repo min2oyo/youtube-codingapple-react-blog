@@ -1,3 +1,5 @@
+import { Isubjects } from "../../../types";
+
 const Input = ({ subjects, setSubjects, addPost, setAddPost }: any) => {
   return (
     <div>
@@ -6,7 +8,7 @@ const Input = ({ subjects, setSubjects, addPost, setAddPost }: any) => {
       }} />
       <button onClick={() => {
         setSubjects([{
-          id: 0,
+          id: Math.max(...subjects.map((item: Isubjects) => item.id)) + 1,
           subject: addPost,
           description: ``,
           like: 0,

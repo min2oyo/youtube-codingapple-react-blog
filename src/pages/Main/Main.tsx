@@ -4,12 +4,14 @@ import Input from "./Input/Input";
 import Nav from "../../components/Nav/Nav";
 import Post from "./Post/Post";
 import Modal from "../../components/Modal/Modal";
+import { Isubjects } from "../../types";
 
 const Main = () => {
-  const [subjects, setSubjects] = useState<any>([]);
+  const [subjects, setSubjects] = useState<Isubjects[]>([]);
   const [modalSwitch, setModalSwitch] = useState(0);
   const [modal, setModal] = useState(false);
   const [addPost, setAddPost] = useState(``);
+  console.log(subjects);
 
   useEffect(() => {
     fetch(`/data/subjects.json`)
