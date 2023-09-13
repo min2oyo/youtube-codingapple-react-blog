@@ -1,4 +1,8 @@
 import { useEffect, useState } from "react";
+import Nav from "../../components/Nav/Nav";
+import Modal from "../../components/Modal/Modal";
+import PostList from "./PostList/PostList";
+import Input from "./Input/Input";
 
 const Main = () => {
   const [subjects, setSubjects] = useState<any>([]);
@@ -15,70 +19,15 @@ const Main = () => {
 
   return (
     <div className="main">
-      <div className="black-nav">
-        <h4>ReactBlog</h4>
-      </div>
-
-      {
-        subjects.map(function (item: any, i: any) {
-          return (
-            <div className="list" key={i}>
-
-              <h4 onClick={() => { setModal(!modal); setModalSwitch(i); }}>
-                {item.subject}
-                <span onClick={(e) => {
-                  e.stopPropagation();
-                  const copy = [...subjects];
-                  copy[i].like = copy[i].like + 1;
-                  setSubjects(copy);
-                }}> 👍</span>{item.like}
-              </h4>
-
-              <p>2월 17일 발행</p>
-              <button onClick={() => {
-                const copy = [...subjects];
-                copy.splice(i, 1);
-                setSubjects(copy);
-              }}>삭제</button>
-
-            </div>
-          );
-        })
-      }
-
-      <input onChange={(e) => {
-        setAddPost(e.target.value);
-      }} />
-
-      <button onClick={() => {
-        setSubjects([{
-          id: 0,
-          subject: addPost,
-          description: ``,
-          like: 0,
-          createDate: `2020-00-00`,
-          modifiedDate: ``
-        }, ...subjects]);
-      }}>글 발행</button>
-
-      {
-        modal && <Modal modalSwitch={modalSwitch} subjects={subjects} />
-      }
+      <Nav />
+      {subjects.map((item: any, i: number) =>
+        <PostList key={item.id} item={item} i={i} subjects={subjects} setSubjects={setSubjects} modal={modal} setModal={setModal} setModalSwitch={setModalSwitch} />
+      )}
+      <Input subjects={subjects} setSubjects={setSubjects} addPost={addPost} setAddPost={setAddPost} />
+      {modal && <Modal modalSwitch={modalSwitch} subjects={subjects} />}
 
     </div >
   );
 };
 
 export default Main;
-
-function Modal({ modalSwitch, subjects }: any) {
-  return (
-    <div className="modal">
-      <h4>{subjects[modalSwitch].subject}</h4>
-      <p>{subjects[modalSwitch].createDate}</p>
-      <p>{subjects[modalSwitch].description}</p>
-      <button>글수정</button>
-    </div>
-  );
-
-}
