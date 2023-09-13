@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import Input from "./Input/Input";
 import Nav from "../../components/Nav/Nav";
-import PostList from "./PostList/PostList";
+import Post from "./Post/Post";
 import Modal from "../../components/Modal/Modal";
 
 const Main = () => {
@@ -22,7 +22,7 @@ const Main = () => {
       <Nav />
       <Input subjects={subjects} setSubjects={setSubjects} addPost={addPost} setAddPost={setAddPost} />
       {subjects.map((item: any, i: number) =>
-        <PostList key={item.id} item={item} i={i} subjects={subjects} setSubjects={setSubjects} modal={modal} setModal={setModal} setModalSwitch={setModalSwitch} />
+        <Post key={item.id} item={item} i={i} subjects={subjects} setSubjects={setSubjects} modal={modal} setModal={setModal} setModalSwitch={setModalSwitch} />
       )}
       {modal && <Modal modalSwitch={modalSwitch} subjects={subjects} />}
     </div >

@@ -1,4 +1,4 @@
-const PostList = ({ item, i, subjects, setSubjects, modal, setModal, setModalSwitch }: any) => {
+const Post = ({ item, i, subjects, setSubjects, modal, setModal, setModalSwitch }: any) => {
   return (
     <div className="post-list">
 
@@ -23,4 +23,4 @@ const PostList = ({ item, i, subjects, setSubjects, modal, setModal, setModalSwi
   );
 };
 
-export default PostList;
+export default Post;
